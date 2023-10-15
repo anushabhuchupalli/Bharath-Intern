@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bree+Serif&family=Chivo:wght@300&family=Comfortaa:wght@300&family=Dancing+Script:wght@400;500;700&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<style>
+    body{
+    margin: 0;
+    font-family: sans-serif;
+    background: #f8cdcd;
+    text-align: center;
+    padding: 2em;
+    color: #fff;
+}
 
+.title{
+    font-size: 5em;
+    margin-top: 5rem;
+    color: #708197;
+    margin-bottom: 5rem;
+    font-family: 'dancing script';
+}
+
+.units {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5em;
+    flex-wrap: wrap;
+}
+
+.panel {
+    border-radius: 10px;
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.15);
+        min-width: 15em;
+        height: 13em;
+        position: relative;
+}
+
+.panel:nth-child(1){
+    background: #89cff0;
+}
+
+.panel:nth-child(2) {
+    background: #f26ca7;
+}
+
+.panel:nth-child(3) {
+    background: #89cff0;
+}
+
+.bg-unit {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 7em;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.panel:nth-child(1) .bg-unit {
+    color: #a3d5ea;
+}
+
+.panel:nth-child(2) .bg-unit {
+    color: #f385b4;
+}
+
+.panel:nth-child(3) .bg-unit {
+    color: #a3d5ea;
+}
+
+.panel h2, .panel input {
+    position: relative;
+}
+
+.panel h2 {
+    text-align: left;
+    padding-left: 1em;
+    font-size: none;
+}
+
+.panel input::-webkit-outer-spin-button,
+.panel input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.panel input {
+    border: none;
+    background: none;
+    margin-top: 3.5rem;
+    width: 4em;
+    height: 2em;
+    font-size: 3em;
+    font-family: 600;
+    text-align: center;
+    color: #f8f0f8;
+}
+
+.panel input:focus {
+    outline: none;
+}
+
+.photo{
+    height: 700px;
+    width: 300px;
+}
+</style>
+<body>
+    <header></header>
+    <main>
+        <h1 class="title">Temprature Converter</h1>
+        <section class="inputs">
+            <div class="units">
+                <div class="panel">
+                    <h1 class="bg-unit">&degC</h1>
+                    <h2>CELSIUS</h2>
+                    <input type="number" name="celcius" id="celcius" class="input" placeholder="celcius" value="0">
+                </div>
+                <div class="panel">
+                    <h1 class="bg-unit">&degF</h1>
+                    <h2>FAHRENHEIT</h2>
+                    <input type="number" name="fahrenheit" id="fahrenheit" class="input" placeholder="fahrenheit" value="32">
+                </div>
+                <div class="panel">
+                    <h1 class="bg-unit">&degK</h1> 
+                    <h2>KELVIN</h2>
+                    <input type="number" name="kelvin" id="kelvin" class="input" placeholder="kelvin" value="273.15">
+                </div>  
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        const celciusInput = document.getElementById("celcius");
+const fahrenheitInput = document.getElementById("fahrenheit");
+const kelvinInput = document.getElementById("kelvin");
+
+const inputs = document.getElementsByClassName("input");
+
+for (let i = 0; i < inputs.length; i++) {
+    let input = inputs[i];
+
+    input.addEventListener("input", function (e) {
+        let value = parseFloat(e.target.value);
+       
+        switch (e.target.name) {
+            case "celcius":
+                fahrenheitInput.value = ((value * 1.8) + 32);
+                kelvinInput.value = (value + 273.15);
+                break;
+            case "fahrenheit":
+                celciusInput.value = ((value - 32) / 1.8);
+                kelvinInput.value = (((value - 32) / 1.8) + 273.15);
+                break;
+            case "kelvin":
+                celciusInput.value = value - 273.15;
+                fahrenheitInput.value = (((value - 273.15) * 1.8) + 32);
+                break;
+        }
+    });
+}
+
+
+    </script>
+</body>
+</html>
